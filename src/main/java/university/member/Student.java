@@ -1,14 +1,16 @@
 package university.member;
 
 public class Student extends Member {
+    private Lecturer lecturer;
+    
     public Student() {}
     
+    @Override
     public void printInfo(){
         System.out.println("...");
     }
     
-    public void update(Member m) {
-      System.out.println("Welcome new lecturer!"); 
-      m.printInfo();
+    public void update(String s) {
+      System.out.println(s); 
    }
 }

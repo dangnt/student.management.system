@@ -10,7 +10,7 @@ public class Lecturer extends Member {
         System.out.println("...");
     }
     
-    public void attach(Student s){
+    public void addObserver(Student s){
       StudentList.add(s);		
    }
     
