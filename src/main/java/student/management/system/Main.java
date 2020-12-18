@@ -8,22 +8,31 @@ import university.member.*;
 public class Main {
 
     public static void main(String [] args){
-        ArrayList<Member> StudentList = new ArrayList<>();
-        ArrayList<Member> LecturerList = new ArrayList<>();
-
-        MemberCreator factory;
-                
+        ArrayList<Student> StudentList = new ArrayList<>();
+        ArrayList<Lecturer> LecturerList = new ArrayList<>();
+        
         Scanner MyInput = new Scanner(System.in);
-        System.out.println("Add a new member: (L)ecturer / (S)tudent)? ");
-        String MemberType = MyInput.nextLine();
-                
-        if(MemberType.equalsIgnoreCase("l")){
-            factory = new LecturerCreator();
-            LecturerList.add(factory.CreateMember());
-        }
-        else if (MemberType.equalsIgnoreCase("s")){
-            factory = new StudentCreator();
-            StudentList.add(factory.CreateMember());
+        
+        while (true) { 
+            System.out.println("Add a new member: (L)ecturer / (S)tudent) (or (E)xit)? ");
+            String MemberType = MyInput.nextLine();
+
+            if(MemberType.equalsIgnoreCase("l")){
+                LecturerCreator factory = new LecturerCreator();
+                Lecturer lecturer = factory.CreateMember();
+                lecturer.addAllFollowers(StudentList);
+                lecturer.notifyAllFollowers();
+                LecturerList.add(lecturer);
+            }
+            else if (MemberType.equalsIgnoreCase("s")){
+                StudentCreator factory = new StudentCreator();
+                Student student = factory.CreateMember();
+                student.following(LecturerList);
+                StudentList.add(student);
+            }
+            else if (MemberType.equalsIgnoreCase("e")){
+                break;
+            }
         }
     }
 }
